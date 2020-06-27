@@ -5,7 +5,6 @@ const alertnode = require('alert-node');
 // const cors = require('cors');
 const app = express();
 
-app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }))
