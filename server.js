@@ -53,13 +53,12 @@ getUsersFromDB();
 const {
     PORT = 3000,
     SESSION_LIFETIME = TWO_HOURS,
-    NODE_ENV = 'development',
+    NODE_ENV = 'production',
     SESS_SECRET = 'ssh!cms\'asecret',
     SESS_NAME = 'sid'
 } = process.env
 
 const IN_PROD = NODE_ENV === 'production'
-
 app.use(session({
     name: SESS_NAME,
     secret: SESS_SECRET,
