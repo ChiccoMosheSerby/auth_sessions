@@ -1,7 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
-// const alertnode =  require('alert-node');
+const alertnode =  require('alert-node');
 
 const app = express();
 app.use(bodyParser.urlencoded({
@@ -195,7 +195,7 @@ app.post('/login', redirectHome, (req, res) => {
             return res.redirect('/home')
         }
     }
-    alert('wrong email or password - pls try again or register')
+    alertnode('wrong email or password - pls try again or register')
     res.redirect('/login')
 })
 

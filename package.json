@@ -1,5 +1,5 @@
 {
-  "name": "microservices",
+  "name": "auth_sessions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChiccoMosheSerby/microservices.git"
+    "url": "git+https://github.com/ChiccoMosheSerby/auth_sessions.git"
   },
-  "author": "",
+  "author": "ChiccoMosheSerby",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChiccoMosheSerby/microservices/issues"
+    "url": "https://github.com/ChiccoMosheSerby/auth_sessions/issues"
   },
-  "homepage": "https://github.com/ChiccoMosheSerby/microservices#readme",
+  "homepage": "https://github.com/ChiccoMosheSerby/auth_sessions#readme",
   "dependencies": {
     "alert-node": "^3.0.11",
     "body-parser": "^1.19.0",
