@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const alertnode = require('alert-node');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 
 app.use(express.static('public'));
@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.use(cors());
+// app.use(cors());
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
