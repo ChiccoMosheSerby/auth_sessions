@@ -160,13 +160,13 @@ app.get('/home', redirectLogin, (req, res) => {
 `)
 })
 
-app.get('/login',  (req, res) => {
+app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
     <form action='/login' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
-    <input type='submit' />
+    <a windows.location.href = '/home'> <input type='submit' /></a>
     </form>
     <a href='/register'>Register</a>
     `
@@ -180,7 +180,7 @@ app.get('/register', redirectHome, (req, res) => {
     <input type='text' name='name' placeholder='name' required />
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
-    <a windows.location.href = '/home'><input type='submit' /></a>
+    <input type='submit' />
     </form>
     <a href='/login'>login</a>
 
