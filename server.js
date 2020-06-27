@@ -160,7 +160,7 @@ app.get('/home', redirectLogin, (req, res) => {
 `)
 })
 
-app.get('/login', redirectHome, (req, res) => {
+app.get('/login',  (req, res) => {
     res.send(`
     <h1>Login</h1>
     <form action='/login' method='POST'>
