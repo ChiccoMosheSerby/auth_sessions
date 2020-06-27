@@ -5,6 +5,8 @@ const alertnode = require('alert-node');
 // const cors = require('cors');
 const app = express();
 
+
+require('express-namespace');
 app.use(bodyParser.urlencoded({
     extended: true
 }))
@@ -102,6 +104,7 @@ const redirectRegister = (req, res, next) => {
 const redirectHome = (req, res, next) => {
     if (req.session.userId) {
         res.redirect('/home')
+
     }
     else {
         next()
@@ -150,8 +153,6 @@ app.get('/home', redirectLogin, (req, res) => {
     <li>Name:${user.name}</li>
     <li>Email:${user.email}</li>
 </ul>
-
-
 <form action='/logout' method='post'>
 <input type='submit' value="Logout" />
 </form>
@@ -160,11 +161,9 @@ app.get('/home', redirectLogin, (req, res) => {
 })
 
 app.get('/login', redirectHome, (req, res) => {
-    res.setHeader("Content-Type", "text/html")
-
     res.send(`
     <h1>Login</h1>
-    <form action='/login' method='post'>
+    <form action='/login' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit' />
@@ -177,7 +176,7 @@ app.get('/login', redirectHome, (req, res) => {
 app.get('/register', redirectHome, (req, res) => {
     res.send(`
     <h1>register</h1>
-    <form action='/register' method='post'>
+    <form action='/register' method='POST'>
     <input type='text' name='name' placeholder='name' required />
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
@@ -188,20 +187,22 @@ app.get('/register', redirectHome, (req, res) => {
     `
     )
 })
-app.post('/login', redirectHome, (req, res) => {
-    const { email, password } = req.body;
 
-    if (email && password) {//TODO: more validation
-        const user = users.find(user => user.email === email && user.password === password) //TODO hash
+    app.post('/login', redirectHome, (req, res) => {
+        const { email, password } = req.body;
 
-        if (user) {
-            req.session.userId = user.id;
-            return res.redirect('/home')
+        if (email && password) {//TODO: more validation
+            const user = users.find(user => user.email === email && user.password === password) //TODO hash
+
+            if (user) {
+                req.session.userId = user.id;
+                return res.redirect('/home')
+            }
         }
-    }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
-})
+        alertnode('wrong email or password - pls try again or register')
+        res.redirect('/login')
+    })
+
 
 app.post('/register', redirectHome, (req, res) => {
     const { name, email, password } = req.body;
