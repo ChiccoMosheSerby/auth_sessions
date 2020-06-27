@@ -181,7 +181,7 @@ app.get('/register', redirectHome, (req, res) => {
     <input type='text' name='name' placeholder='name' required />
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
-    <input windows.location.href = '/home' type='submit' />
+    <a windows.location.href = '/home'><input type='submit' /></a>
     </form>
     <a href='/login'>login</a>
 
