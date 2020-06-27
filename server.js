@@ -160,6 +160,8 @@ app.get('/home', redirectLogin, (req, res) => {
 })
 
 app.get('/login', redirectHome, (req, res) => {
+    res.setHeader("Content-Type", "text/html")
+
     res.send(`
     <h1>Login</h1>
     <form action='/login' method='post'>
