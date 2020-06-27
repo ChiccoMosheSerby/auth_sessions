@@ -53,7 +53,7 @@ getUsersFromDB();
 const {
     PORT = 3000,
     SESSION_LIFETIME = TWO_HOURS,
-    NODE_ENV = 'production',
+    NODE_ENV = 'development',//development
     SESS_SECRET = 'ssh!cms\'asecret',
     SESS_NAME = 'sid'
 } = process.env
