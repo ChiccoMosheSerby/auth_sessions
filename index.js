@@ -2,8 +2,11 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const alertnode =  require('alert-node');
+var path = require("path");
 
 const app = express();
+
+app.use(express.static('public'));
 app.use(bodyParser.urlencoded({
     extended: true
 }))
