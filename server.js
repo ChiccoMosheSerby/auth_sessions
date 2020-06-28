@@ -192,14 +192,15 @@ app.post('/login', redirectHome, (req, res) => {
     const password = req.body.password;
     getUsersFromDB();
 
-    // if (email && password) {//TODO: more validation
-    const user = users.find(user => user.email === email && user.password === password) //TODO hash
+    if (email && password) {//TODO: more validation
+        const user  = users[0];
+        // = users.find(user => user.email === email && user.password === password) //TODO hash
 
-    if (user) {
-        req.session.userId = user.id;
-        return res.redirect('/home')
+        if (user) {
+            req.session.userId = user.id;
+            return res.redirect('/home')
+        }
     }
-    // }
     alertnode('wrong email or password - pls try again or register')
     res.redirect('/login')
 })
