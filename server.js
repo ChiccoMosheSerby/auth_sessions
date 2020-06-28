@@ -178,7 +178,7 @@ app.get('/register', redirectHome, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action='/loginpost' method='POST'>
+    <form action='/login' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit'/>
@@ -187,7 +187,7 @@ app.get('/login', redirectHome, (req, res) => {
     `
     )
 })
-app.post('/loginpost',  (req, res) => {
+app.post('/login', redirectHome, (req, res) => {
     const { email, password } = req.body;
     getUsersFromDB();
 
@@ -198,14 +198,9 @@ app.post('/loginpost',  (req, res) => {
             req.session.userId = user.id;
             return res.redirect('/home')
         }
-        else{
-            alertnode('wrong email or password - pls try again or register')
-            res.redirect('/login')
-
-        }
     }
-    // res.redirect('/login')
-
+    alertnode('wrong email or password - pls try again or register')
+    res.redirect('/login')
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
