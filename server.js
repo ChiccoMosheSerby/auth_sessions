@@ -173,34 +173,33 @@ app.get('/register', redirectHome, (req, res) => {
     )
 })
 
-
-
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action="/loginpost" method="post">
+    <form action='/login' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
-    <input type='submit' />
+    <input type='submit'/>
     </form>
     <a href='/register'>Register</a>
     `
     )
 })
-app.post('/loginpost', redirectHome, (req, res) => {
-    const { email, password } = req.body;
-    getUsersFromDB();
+app.post('/login', redirectHome, (req, res) => {
+    res.send('POST login')
+    // const { email, password } = req.body;
+    // getUsersFromDB();
 
-    if (email && password) {//TODO: more validation
-        const user = users.find(user => user.email === email && user.password === password) //TODO hash
+    // if (email && password) {//TODO: more validation
+    //     const user = users.find(user => user.email === email && user.password === password) //TODO hash
 
-        if (user) {
-            req.session.userId = user.id;
-            return res.redirect('/home')
-        }
-    }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
+    //     if (user) {
+    //         req.session.userId = user.id;
+    //         return res.redirect('/home')
+    //     }
+    // }
+    // alertnode('wrong email or password - pls try again or register')
+    // res.redirect('/login')
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
