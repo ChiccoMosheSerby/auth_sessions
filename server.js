@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 
 // app.use(cors());
 
-const TWO_HOURS = 1000 * 60 * 60 * 2; 
+const TWO_HOURS = 1000 * 60 * 60 * 2;
 
 //connect mongoose---------------------------------------------------------------
 const mongoose = require('mongoose');
@@ -178,7 +178,7 @@ app.get('/register', redirectHome, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form method="post" action='/loginpost'>
+    <form action='/loginpost' method="post" >
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit' />
