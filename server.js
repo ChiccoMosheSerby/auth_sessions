@@ -74,7 +74,7 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
-
+    getUsersFromDB();
     const { userId } = req.session
     if (userId) {
         res.locals.user = users.find(user => user.id === userId)
@@ -187,6 +187,7 @@ app.get('/register', redirectHome, (req, res) => {
 
 app.post('/login', redirectHome, (req, res) => {
     const { email, password } = req.body;
+    getUsersFromDB();
 
     if (email && password) {//TODO: more validation
         const user = users.find(user => user.email === email && user.password === password) //TODO hash
