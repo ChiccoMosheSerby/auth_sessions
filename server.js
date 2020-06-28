@@ -178,7 +178,7 @@ app.get('/register', redirectHome, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action='/login' method='POST'>
+    <form action='https://auth-sessions.herokuapp.com/login' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit'/>
