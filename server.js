@@ -201,8 +201,11 @@ app.post('/login', redirectHome, (req, res) => {
             return res.redirect('/home')
         }
     // }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
+    else{
+        alertnode('wrong email or password - pls try again or register')
+        res.redirect('/login')
+    }
+
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
