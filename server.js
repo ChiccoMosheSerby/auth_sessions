@@ -178,7 +178,7 @@ app.get('/register', redirectHome, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action='/loginpost' method="post" >
+    <form action="/action_page.php" method="post" target="_blank">
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit' />
