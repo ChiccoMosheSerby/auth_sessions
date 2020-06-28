@@ -188,11 +188,11 @@ app.get('/login', redirectHome, (req, res) => {
     )
 })
 app.post('/login', redirectHome, (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    // const email = req.body.email;
+    // const password = req.body.password;
     getUsersFromDB();
 
-    if (email && password) {//TODO: more validation
+    // if (email && password) {//TODO: more validation
         const user  = users[0];
         // = users.find(user => user.email === email && user.password === password) //TODO hash
 
@@ -200,7 +200,7 @@ app.post('/login', redirectHome, (req, res) => {
             req.session.userId = user.id;
             return res.redirect('/home')
         }
-    }
+    // }
     alertnode('wrong email or password - pls try again or register')
     res.redirect('/login')
 })
