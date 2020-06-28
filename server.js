@@ -3,6 +3,8 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const alertnode = require('alert-node');
 // const cors = require('cors');
+
+
 const app = express();
 
 
@@ -176,7 +178,7 @@ app.get('/register', redirectHome, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action='/login' method='POST'>
+    <form action='/loginpost' method='POST'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
     <input type='submit'/>
@@ -185,11 +187,8 @@ app.get('/login', redirectHome, (req, res) => {
     `
     )
 })
-app.post('/login', redirectHome, (req, res) => {
-    // const { email, password } = req.body;
-    const email = 'chicco@gmail.com';
-    const password = 'chicco';
-
+app.post('/loginpost',  (req, res) => {
+    const { email, password } = req.body;
     getUsersFromDB();
 
     if (email && password) {//TODO: more validation
@@ -199,9 +198,14 @@ app.post('/login', redirectHome, (req, res) => {
             req.session.userId = user.id;
             return res.redirect('/home')
         }
+        else{
+            alertnode('wrong email or password - pls try again or register')
+            res.redirect('/login')
+
+        }
     }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
+    // res.redirect('/login')
+
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
