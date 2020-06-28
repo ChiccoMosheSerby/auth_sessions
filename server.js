@@ -187,7 +187,7 @@ app.get('/login', redirectHome, (req, res) => {
     `
     )
 })
-app.post('/login', redirectHome, (req, res) => {
+app.post('https://auth-sessions.herokuapp.com/login', redirectHome, (req, res) => {
     // const email = req.body.email;
     // const password = req.body.password;
     getUsersFromDB();
@@ -196,16 +196,13 @@ app.post('/login', redirectHome, (req, res) => {
         const user  = users[0];
         // = users.find(user => user.email === email && user.password === password) //TODO hash
 
-        if (user) {
+        // if (user) {
             req.session.userId = user.id;
             return res.redirect('/home')
-        }
+        // }
     // }
-    else{
-        alertnode('wrong email or password - pls try again or register')
-        res.redirect('/login')
-    }
-
+    // alertnode('wrong email or password - pls try again or register')
+    // res.redirect('/login')
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
