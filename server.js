@@ -2,18 +2,17 @@ const express = require('express');
 const session = require('express-session');
 const bodyParser = require('body-parser');
 const alertnode = require('alert-node');
-const cors = require('cors');
+// const cors = require('cors');
 const app = express();
 
 
-require('express-namespace');
 app.use(bodyParser.urlencoded({
     extended: true
 }))
 
-app.use(cors());
+// app.use(cors());
 
-const TWO_HOURS = 1000 * 60 * 60 * 2;
+const TWO_HOURS = 1000 * 60 * 60 * 2; 
 
 //connect mongoose---------------------------------------------------------------
 const mongoose = require('mongoose');
@@ -55,8 +54,8 @@ getUsersFromDB();
 const {
     PORT = 3000,
     SESSION_LIFETIME = TWO_HOURS,
-    NODE_ENV = 'development',//development
-    SESS_SECRET = 'ssh!cms\'asecret',
+    NODE_ENV = 'development',//production 
+    SESS_SECRET = 'ssh!\'asecret',
     SESS_NAME = 'sid'
 } = process.env
 
@@ -132,7 +131,6 @@ app.get('/profile', redirectLogin, (req, res) => {
     const { user } = res.locals;
     res.send(`
     <h1>PROFILE Route</h1>
-    <a href="">Main</a>
     <ul>
         <li>Name:${user.name}</li>
         <li>Email:${user.email}</li>
@@ -148,7 +146,6 @@ app.get('/home', redirectLogin, (req, res) => {
     const { user } = res.locals;
     res.send(`
 <h1>Home</h1>
-<a href="">Main</a>
 <ul>
     <li>Name:${user.name}</li>
     <li>Email:${user.email}</li>
@@ -163,10 +160,10 @@ app.get('/home', redirectLogin, (req, res) => {
 app.get('/login', redirectHome, (req, res) => {
     res.send(`
     <h1>Login</h1>
-    <form action='/login' method='POST'>
+    <form method="post" action='/login'>
     <input type='email' name='email' placeholder='email' required />
     <input type='password' name='password' placeholder='password' required />
-    <a windows.location.href = '/home'> <input type='submit' /></a>
+    <input type='submit' />
     </form>
     <a href='/register'>Register</a>
     `
@@ -188,20 +185,20 @@ app.get('/register', redirectHome, (req, res) => {
     )
 })
 
-    app.post('/login', redirectHome, (req, res) => {
-        const { email, password } = req.body;
+app.post('/login', redirectHome, (req, res) => {
+    const { email, password } = req.body;
 
-        if (email && password) {//TODO: more validation
-            const user = users.find(user => user.email === email && user.password === password) //TODO hash
+    if (email && password) {//TODO: more validation
+        const user = users.find(user => user.email === email && user.password === password) //TODO hash
 
-            if (user) {
-                req.session.userId = user.id;
-                return res.redirect('/home')
-            }
+        if (user) {
+            req.session.userId = user.id;
+            return res.redirect('/home')
         }
-        alertnode('wrong email or password - pls try again or register')
-        res.redirect('/login')
-    })
+    }
+    alertnode('wrong email or password - pls try again or register')
+    res.redirect('/login')
+})
 
 
 app.post('/register', redirectHome, (req, res) => {
