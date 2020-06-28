@@ -186,20 +186,22 @@ app.get('/login', redirectHome, (req, res) => {
     )
 })
 app.post('/login', redirectHome, (req, res) => {
-    res.send('POST login')
     // const { email, password } = req.body;
-    // getUsersFromDB();
+    const email = 'chicco@gmail.com';
+    const password = 'chicco';
 
-    // if (email && password) {//TODO: more validation
-    //     const user = users.find(user => user.email === email && user.password === password) //TODO hash
+    getUsersFromDB();
 
-    //     if (user) {
-    //         req.session.userId = user.id;
-    //         return res.redirect('/home')
-    //     }
-    // }
-    // alertnode('wrong email or password - pls try again or register')
-    // res.redirect('/login')
+    if (email && password) {//TODO: more validation
+        const user = users.find(user => user.email === email && user.password === password) //TODO hash
+
+        if (user) {
+            req.session.userId = user.id;
+            return res.redirect('/home')
+        }
+    }
+    alertnode('wrong email or password - pls try again or register')
+    res.redirect('/login')
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
