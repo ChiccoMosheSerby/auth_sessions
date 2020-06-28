@@ -187,7 +187,7 @@ app.get('/login', redirectHome, (req, res) => {
     `
     )
 })
-app.post('https://auth-sessions.herokuapp.com/login', redirectHome, (req, res) => {
+app.post('/login', redirectHome, (req, res) => {
     // const email = req.body.email;
     // const password = req.body.password;
     getUsersFromDB();
