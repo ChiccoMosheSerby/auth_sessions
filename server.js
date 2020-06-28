@@ -157,18 +157,6 @@ app.get('/home', redirectLogin, (req, res) => {
 `)
 })
 
-app.get('/login', redirectHome, (req, res) => {
-    res.send(`
-    <h1>Login</h1>
-    <form method="post" action='/login'>
-    <input type='email' name='email' placeholder='email' required />
-    <input type='password' name='password' placeholder='password' required />
-    <input type='submit' />
-    </form>
-    <a href='/register'>Register</a>
-    `
-    )
-})
 
 app.get('/register', redirectHome, (req, res) => {
     res.send(`
@@ -185,7 +173,21 @@ app.get('/register', redirectHome, (req, res) => {
     )
 })
 
-app.post('/login', redirectHome, (req, res) => {
+
+
+app.get('/login', redirectHome, (req, res) => {
+    res.send(`
+    <h1>Login</h1>
+    <form method="post" action='/loginpost'>
+    <input type='email' name='email' placeholder='email' required />
+    <input type='password' name='password' placeholder='password' required />
+    <input type='submit' />
+    </form>
+    <a href='/register'>Register</a>
+    `
+    )
+})
+app.post('/loginpost', redirectHome, (req, res) => {
     const { email, password } = req.body;
     getUsersFromDB();
 
@@ -200,6 +202,35 @@ app.post('/login', redirectHome, (req, res) => {
     alertnode('wrong email or password - pls try again or register')
     res.redirect('/login')
 })
+// app.route("/login")
+// .get('/login',  (req, res) => {
+//     res.send(`
+//     <h1>Login</h1>
+//     <form method="post" action='/login'>
+//     <input type='email' name='email' placeholder='email' required />
+//     <input type='password' name='password' placeholder='password' required />
+//     <input type='submit' />
+//     </form>
+//     <a href='/register'>Register</a>
+//     `
+//     )
+// })
+// .post('/login',  (req, res) => {
+//     const { email, password } = req.body;
+//     getUsersFromDB();
+
+//     if (email && password) {//TODO: more validation
+//         const user = users.find(user => user.email === email && user.password === password) //TODO hash
+
+//         if (user) {
+//             req.session.userId = user.id;
+//             return res.redirect('/home')
+//         }
+//     }
+//     alertnode('wrong email or password - pls try again or register')
+//     res.redirect('/login')
+// })
+
 
 
 app.post('/register', redirectHome, (req, res) => {
