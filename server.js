@@ -200,12 +200,14 @@ app.post('/login', redirectHome, (req, res) => {
             console.log('-----------------------login user not null');
 
             req.session.userId = user.id;
-            return res.redirect('/home')
+            // return res.redirect('/home')
+             fetch('https://auth-sessions.herokuapp.com/home');
         }
-       
+        else{
+            alertnode('wrong email or password - pls try again or register')
+            res.redirect('/login')
+        }
     }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
 
 })
 // app.route("/login")
