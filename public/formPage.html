@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginPOST</title>
+</head>
+
+<body>
+    <h1>loginPOST</h1>
+    <form onsubmit="postLogin(event)">
+        <input type='email' name='email' placeholder='email' required />
+        <input type='password' name='password' placeholder='password' required />
+        <input type='submit' />
+    </form>
+    <a href='/register'>login</a>
+
+    <script>
+        function postLogin(e) {
+            e.preventDefault();
+
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: e.target.elements.email.value, password: e.target.elements.password.value }),
+            })
+        }
+    </script>
+</body>
+
+</html>

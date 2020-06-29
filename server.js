@@ -3,17 +3,15 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const alertnode = require('alert-node');
 // const cors = require('cors');
-
-
 const app = express();
 
 
-app.use(bodyParser.urlencoded({
-    extended: true
-}))
+
+app.use(express.static('public'));
+app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(cors());
 app.use(bodyParser.json());
 
-// app.use(cors());
 
 const TWO_HOURS = 1000 * 60 * 60 * 2;
 
@@ -177,17 +175,17 @@ app.get('/register', redirectHome, (req, res) => {
 })
 
 app.get('/login', redirectHome, (req, res) => {
-    res.send(`
-    <h1>Login</h1>
-    <form action='/login' method='POST'>
-    <input type='email' name='email' placeholder='email' required />
-    <input type='password' name='password' placeholder='password' required />
-    <input type='submit'/>
-    </form>
-    <a href='/register'>Register</a> 
-    `
-    )
-    // res.sendFile( __dirname + "/public/" + "formPage.html" );
+    // res.send(`
+    // <h1>Login</h1>
+    // <form action='/login' method='POST'>
+    // <input type='email' name='email' placeholder='email' required />
+    // <input type='password' name='password' placeholder='password' required />
+    // <input type='submit'/>
+    // </form>
+    // <a href='/register'>Register</a> 
+    // `
+    // )
+    res.sendFile( __dirname + "/public/" + "formPage.html" );
 })
 app.post('/login', redirectHome, (req, res) => {
         console.log('-----------------------login POST');
