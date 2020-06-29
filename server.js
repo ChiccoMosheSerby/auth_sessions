@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.urlencoded({
     extended: true
 }))
+app.use(bodyParser.json());
 
 // app.use(cors());
 
@@ -186,23 +187,26 @@ app.get('/login', redirectHome, (req, res) => {
     <a href='/register'>Register</a> 
     `
     )
+    // res.sendFile( __dirname + "/public/" + "formPage.html" );
 })
 app.post('/login', redirectHome, (req, res) => {
-    // const email = req.body.email;
-    // const password = req.body.password;
+        console.log('-----------------------login POST');
+
+    // console.log(req.body);
+    const email = req.body.email;
+    const password = req.body.password;
     getUsersFromDB();
 
-    // if (email && password) {//TODO: more validation
-        const user  = users[0];
-        // = users.find(user => user.email === email && user.password === password) //TODO hash
+    if (email && password) {//TODO: more validation
+        const user = users.find(user => user.email === email && user.password === password) //TODO hash
 
-        // if (user) {
+        if (user) {
             req.session.userId = user.id;
             return res.redirect('/home')
-        // }
-    // }
-    // alertnode('wrong email or password - pls try again or register')
-    // res.redirect('/login')
+        }
+    }
+    alertnode('wrong email or password - pls try again or register')
+    res.redirect('/login')
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
