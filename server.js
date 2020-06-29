@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const alertnode = require('alert-node');
 // const cors = require('cors');
 const app = express();
-
+const fetch = require("node-fetch");
 
 
 app.use(express.static('public'));
@@ -75,7 +75,6 @@ app.use(session({
 }))
 
 app.use((req, res, next) => {
-    getUsersFromDB();
     const { userId } = req.session
     if (userId) {
         res.locals.user = users.find(user => user.id === userId)
@@ -188,23 +187,28 @@ app.get('/login', redirectHome, (req, res) => {
     res.sendFile( __dirname + "/public/" + "formPage.html" );
 })
 app.post('/login', redirectHome, (req, res) => {
-        console.log('-----------------------login POST');
 
-    // console.log(req.body);
+    console.log(req.body);
     const email = req.body.email;
     const password = req.body.password;
-    getUsersFromDB();
 
     if (email && password) {//TODO: more validation
+
         const user = users.find(user => user.email === email && user.password === password) //TODO hash
 
         if (user) {
+            console.log('-----------------------login user not null');
+
             req.session.userId = user.id;
-            return res.redirect('/home')
+            // return res.redirect('/home')
+             fetch('https://auth-sessions.herokuapp.com/home');
+        }
+        else{
+            alertnode('wrong email or password - pls try again or register')
+            res.redirect('/login')
         }
     }
-    alertnode('wrong email or password - pls try again or register')
-    res.redirect('/login')
+
 })
 // app.route("/login")
 // .get('/login',  (req, res) => {
